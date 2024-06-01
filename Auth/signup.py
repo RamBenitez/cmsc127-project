@@ -41,7 +41,7 @@ def signup():
  #Sign up as customer             
 def signup_customer():
     
-    print("\n-----SIGN UP CUSTOMER -----")
+    print("\n\033[1m-----SIGN UP CUSTOMER -----\033[0m")
     customerName= input("Enter name:")
     customerUsername= input("Enter username:")
     customerPassword= input("Enter password:")
@@ -58,7 +58,7 @@ def signup_customer():
 
 #sign up as customer
 def signup_owner():
-    print("\n-----SIGN UP OWNER -----")
+    print("\n\033[1m-----SIGN UP OWNER -----\033[0m")
     ownerName= input("Enter name:")
     ownerUsername= input("Enter username:")
     ownerPassword= input("Enter password:")
