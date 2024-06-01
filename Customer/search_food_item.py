@@ -1,6 +1,6 @@
 def search_food_item():
     while True:
-        print("\n\033[1m------SEARCH FOR A FOOD ITEM MENU------\033[0m")
+        print("\n\033[1m\033[94m------SEARCH FOR A FOOD ITEM MENU------\033[0m")
         print("[1] Search by price range")
         print("[2] Search by food type")
         print("[3] Back")
@@ -13,11 +13,11 @@ def search_food_item():
         elif choice == '3':
             break
         else:
-            print("\nInvalid choice. Please try again.")
+            print("\n\033[91mInvalid choice. Please try again.\033[0m")
 
 # Search for food items within a price range
 def search_by_price_range():
-    print("\n\033[1m-----SEARCH BY PRICE RANGE-----\033[0m")
+    print("\n\033[1m\033[94m-----SEARCH BY PRICE RANGE-----\033[0m")
     lower_range = float(input("Input lower range: "))
     higher_range = float(input("Input higher range: "))
     # Query the database to retrieve food items within the price range
@@ -25,7 +25,7 @@ def search_by_price_range():
 
 # Search for food items by food type
 def search_by_food_type():
-    print("\n\033[1m-----SEARCH BY FOOD TYPE-----\033[0m")
+    print("\n\033[1m\033[94m-----SEARCH BY FOOD TYPE-----\033[0m")
     food_type = input("Input food type: ")
     # Query the database to retrieve food items of the food type
     # Print the food items that match the food type

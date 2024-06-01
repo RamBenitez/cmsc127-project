@@ -7,7 +7,7 @@ from .update import update
 def owner_menu(name):
     while True:
         print(f"\nWelcome, {name}!\n") #dummy palang
-        print("—---------- MENU —----")
+        print("\033[1m\033[94m—---------- MENU —----\033[0m")
         print("[1] Add")
         print("[2] Update")
         print("[3] Delete")
@@ -35,5 +35,5 @@ def owner_menu(name):
             print("Exiting the application.")
             exit(0)
         else:
-            print("Invalid choice. Please try again.")
+            print("\033[91mInvalid choice. Please try again.\033[0m")
 

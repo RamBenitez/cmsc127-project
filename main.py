@@ -3,7 +3,7 @@ from Auth.signup import signup
 
 def main_menu():
     while True:
-        print("\n\033[1m-------- MENU --------\033[0m")  
+        print("\n\033[1m\033[94m-------- MENU --------\033[0m")  
         print("[1] Log In")
         print("[2] Sign Up")
         print("[0] Exit")
@@ -17,7 +17,7 @@ def main_menu():
             print("Exiting the application.")
             break
         else:
-            print("Invalid choice. Please try again.")
+            print("\033[91mInvalid choice. Please try again.\033[0m")
 
 if __name__ == "__main__":
     main_menu()
