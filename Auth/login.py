@@ -1,4 +1,3 @@
-
 def login():
    #DUMMY LANG
     valid_username="Alice"
