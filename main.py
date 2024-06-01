@@ -3,7 +3,7 @@ from Auth.signup import signup
 
 def main_menu():
     while True:
-        print("-------- MENU --------")
+        print("\n-------- MENU --------")  
         print("[1] Log In")
         print("[2] Sign Up")
         print("[0] Exit")
