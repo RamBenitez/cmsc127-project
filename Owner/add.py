@@ -1,6 +1,6 @@
 def add():
     while True:
-        print("\n\033[1m------ADD MENU------\033[0m") 
+        print("\n\033[1m\033[94m------ADD MENU------\033[0m") 
         print("[1] Add a food establishment")
         print("[2] Add a food item")
         print("[3] Back")
@@ -14,19 +14,19 @@ def add():
         elif choice == '3':
             break
         else:
-            print("Invalid choice. Please try again.")
+            print("\033[91mInvalid choice. Please try again.\033[0m")
 
 def add_food_establishment():
-    print("\n\033[1m------ADD A FOOD ESTABLISHMENT------\033[0m")  
+    print("\n\033[1m\033[94m------ADD A FOOD ESTABLISHMENT------\033[0m")  
     FoodEstablishmentName =input("Enter Food Establishment Name:")
-    print("Successfully Added!")
+    print("\033[92mSuccessfully Added!\033[0m")
     #insert food establishment name to database
 
 def add_food_item():
-    print("\n\033[1m------ADD A FOOD ITEM------\033[0m")  
+    print("\n\033[1m\033[94m------ADD A FOOD ITEM------\033[0m")  
     FoodItemName =input("Enter Food Establishment Name:")
     FoodItemEstablishmentName =input("Enter Food Item Establishment Name:")
     FoodItemPrice =input("Enter Food Item Price:")
     FoodItemCategory=input("Enter Food Item Category:")
-    print("Successfully Added!")
+    print("\033[92mSuccessfully Added!\033[0m")
     #insert to add food item infos 

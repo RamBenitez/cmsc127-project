@@ -1,6 +1,6 @@
 def delete():
     while True:
-        print("\n\033[1m------DELETE MENU------\033[0m") 
+        print("\n\033[1m\033[94m------DELETE MENU------\033[0m") 
         print("[1] Delete a food establishment")
         print("[2] Delete a food item")
         print("[3] Delete a food review")
@@ -17,27 +17,27 @@ def delete():
         elif choice == '4':
             break
         else:
-            print("Invalid choice. Please try again.")
+            print("\033[91mInvalid choice. Please try again.\033[0m")
 
 def delete_food_establishment():
-    print("\n\033[1m------DELETE A FOOD ESTABLISHMENT------\033[0m")  
+    print("\n\033[1m\033[94m------DELETE A FOOD ESTABLISHMENT------\033[0m")  
     # Query to get all food establishments
     # Print all food establishments
     print("Food Establishments...")
     choice = input("Choice: ")
     # Query to delete the selected food establishment
     # Delete the food establishment from the database
-    print("Successfully Deleted!")
+    print("\033[92mSuccessfully Deleted!\033[0m")
 
 def delete_food_item():
-    print("\n\033[1m------DELETE A FOOD ITEM------\033[0m")  
+    print("\n\033[1m\033[94m------DELETE A FOOD ITEM------\033[0m")  
     # Query to get all food items of the selected food establishment
     # Print all food items
     print("Food Items:")
     choice = input("Choice: ")
     # Query to delete the selected food item
     # Delete the food item from the database
-    print("Successfully Deleted!")
+    print("\033[92mSuccessfully Deleted!\033[0m")
 
 def delete_food_review():
     print("\n\033[1m------DELETE A FOOD REVIEW------\033[0m")  
@@ -47,4 +47,4 @@ def delete_food_review():
     choice = input("Choice: ")
     # Query to delete the selected food review
     # Delete the food review from the database
-    print("Successfully Deleted!")
+    print("\033[92mSuccessfully Deleted!\033[0m")
