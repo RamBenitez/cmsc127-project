@@ -23,6 +23,7 @@ def update_food_establishment():
     print("Food Establishments...")
     choice = input("Choice: ")
     new_name = input("Enter New Food Establishment Name: ")
+    print("Successfully Updated!")
     # Query to update the food establishment name in the database
 
 def update_food_item():
@@ -35,4 +36,5 @@ def update_food_item():
     new_name = input("Enter New Food Item Name: ")
     new_price = input("Enter New Food Item Price: ")
     new_category = input("Enter New Food Item Category: ")
+    print("Successfully Updated!")
     # Update food item name, price, and category in the database

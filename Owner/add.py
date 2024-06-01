@@ -19,7 +19,8 @@ def add():
 def add_food_establishment():
     print("\n\033[1m------ADD A FOOD ESTABLISHMENT------\033[0m")  
     FoodEstablishmentName =input("Enter Food Establishment Name:")
-    #insert  query food establishment name to database
+    print("Successfully Added!")
+    #insert food establishment name to database
 
 def add_food_item():
     print("\n\033[1m------ADD A FOOD ITEM------\033[0m")  
@@ -27,4 +28,5 @@ def add_food_item():
     FoodItemEstablishmentName =input("Enter Food Item Establishment Name:")
     FoodItemPrice =input("Enter Food Item Price:")
     FoodItemCategory=input("Enter Food Item Category:")
-    #insert queries to add food item infos 
+    print("Successfully Added!")
+    #insert to add food item infos 
