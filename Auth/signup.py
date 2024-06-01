@@ -1,3 +1,6 @@
+from .login import login 
+from Customer.customer import customer_menu
+
 def signup():
     while True:
         print("\n-------- SIGN UP --------")
@@ -8,9 +11,22 @@ def signup():
         choice = input("Enter your choice: ") 
 
         if choice == '1':
-            signup_customer()
+            if signup_customer():
+                name = login()
+                if name:
+                    customer_menu(name)  # Show the customer menu upon successful signup and login
+                    break
+                else:
+                    print("Login failed. Please try again.")
+                    login()
         elif choice == '2':
-            signup_owner()
+            if signup_owner():
+                name = login()
+                if name:
+                    break  
+                else:
+                    print("Login failed. Please try again.")
+                    login()
         elif choice == '3':
             break
         elif choice == '0':
@@ -22,12 +38,20 @@ def signup():
 
  #Sign up as customer             
 def signup_customer():
+    
     print("\n-----SIGN UP CUSTOMER -----")
     customerName= input("Enter name:")
     customerUsername= input("Enter username:")
     customerPassword= input("Enter password:")
     customerConfirmPassword= input("Confirm password:")
-#implement confirm password validation 
+
+    if customerPassword != customerConfirmPassword:
+        print("\nPasswords do not match. Please try again.\n")
+        return False
+    else:
+        #Save the new customer to the database
+        print("\nCustomer signed up successfully!\n")
+        return True
 
 
 #sign up as customer
@@ -37,5 +61,13 @@ def signup_owner():
     ownerUsername= input("Enter username:")
     ownerPassword= input("Enter password:")
     ownerConfirmPassword= input("Confirm password:")
-#implement confirm password validation 
+
+    if ownerPassword != ownerConfirmPassword:
+        print("\nPasswords do not match. Please try again.\n")
+        return False
+    else:
+        #Save the new owner to the database
+        print("\nCustomer signed up successfully!\n")
+        return True
+
   
