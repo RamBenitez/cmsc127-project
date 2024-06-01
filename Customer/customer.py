@@ -6,8 +6,8 @@ from .update_review import update_review
 
 def customer_menu(name):
     while True:
-        print(f"\nWelcome, {name}!\n") #dummy palang
-        print("—---------- MENU —----")
+        print(f"\n\033[1mWelcome, {name}!\033[0m\n") #dummy palang
+        print("\033[1m—---------- MENU —----\033[0m")
         print("[1] Add a review")
         print("[2] Update a review")
         print("[3] Delete a review")

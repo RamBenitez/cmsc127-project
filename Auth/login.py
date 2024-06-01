@@ -6,7 +6,7 @@ def login():
     valid_password="Alice"
     valid_name="Alice Guo"
 
-    print("\n-----------LOG IN ---------")
+    print("\n\033[1m-----------LOG IN ---------\033[0m")
     username= input("Enter username:")
     password= input("Enter password:")
 
