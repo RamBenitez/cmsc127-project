@@ -10,11 +10,21 @@ def signup():
         choice = input("Enter your choice: ") 
 
         if choice == '1':
-           if signup_customer():
-                login()
+            if signup_customer():
+                login_successful = login()
+                if login_successful:
+                    break 
+                else:
+                    print("Login failed. Please try again.")
+                    login()
         elif choice == '2':
             if signup_owner():
-                login()
+                login_successful = login()
+                if login_successful:
+                    break  
+                else:
+                    print("Login failed. Please try again.")
+                    login()
         elif choice == '3':
             break
         elif choice == '0':
