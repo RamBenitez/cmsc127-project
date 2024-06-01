@@ -4,7 +4,7 @@ from Owner.owner import owner_menu
 
 def signup():
     while True:
-        print("\n-------- SIGN UP --------")
+        print("\n\033[1m-------- SIGN UP --------\033[0m")
         print("[1] Sign Up as Customer")
         print("[2] Sign Up as Food Establishment Owner")
         print("[3] Back")
@@ -69,7 +69,7 @@ def signup_owner():
         return False
     else:
         #Save the new owner to the database
-        print("\nCustomer signed up successfully!\n")
+        print("\nOwner signed up successfully!\n")
         return True
 
   
