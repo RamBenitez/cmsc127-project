@@ -22,9 +22,20 @@ def signup():
 
  #Sign up as customer             
 def signup_customer():
-    print("\n Customer Signup ")
+    print("\n-----SIGN UP CUSTOMER -----")
+    customerName= input("Enter name:")
+    customerUsername= input("Enter username:")
+    customerPassword= input("Enter password:")
+    customerConfirmPassword= input("Confirm password:")
+#implement confirm password validation 
 
 
 #sign up as customer
 def signup_owner():
-    print("\n Food Establishment Owner Signup ")
+    print("\n-----SIGN UP OWNER -----")
+    ownerName= input("Enter name:")
+    ownerUsername= input("Enter username:")
+    ownerPassword= input("Enter password:")
+    ownerConfirmPassword= input("Confirm password:")
+#implement confirm password validation 
+  
