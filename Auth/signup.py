@@ -1,5 +1,6 @@
 from .login import login 
 from Customer.customer import customer_menu
+from Owner.owner import owner_menu
 
 def signup():
     while True:
@@ -14,7 +15,7 @@ def signup():
             if signup_customer():
                 name = login()
                 if name:
-                    customer_menu(name)  # Show the customer menu upon successful signup and login
+                    customer_menu(name)  
                     break
                 else:
                     print("Login failed. Please try again.")
@@ -23,6 +24,7 @@ def signup():
             if signup_owner():
                 name = login()
                 if name:
+                    owner_menu(name)
                     break  
                 else:
                     print("Login failed. Please try again.")
