@@ -1,3 +1,6 @@
+from Database.connection import get_connection
+
+
 def add():
     while True:
         print("\n\033[1m\033[94m------ADD MENU------\033[0m") 
@@ -17,16 +20,63 @@ def add():
             print("\033[91mInvalid choice. Please try again.\033[0m")
 
 def add_food_establishment():
-    print("\n\033[1m\033[94m------ADD A FOOD ESTABLISHMENT------\033[0m")  
-    FoodEstablishmentName =input("Enter Food Establishment Name:")
-    print("\033[92mSuccessfully Added!\033[0m")
-    #insert food establishment name to database
+    print("\n\033[1m\033[94m------ADD A FOOD ESTABLISHMENT------\033[0m")
+    FoodEstablishmentName = input("Enter Food Establishment Name: ")
+    
+    try:
+        connection = get_connection()
+        if connection is None:
+            print("\033[91mConnection to database failed.\033[0m")
+            return
 
+        cursor = connection.cursor()
+        insert_query = """
+        INSERT INTO Food_Establishment (Food_establishment_name) 
+        VALUES (%s)
+        """
+        cursor.execute(insert_query, (FoodEstablishmentName,))
+        connection.commit()
+        
+        print("\033[92mSuccessfully Added!\033[0m")
+    except Error as e:
+        print(f"\033[91mError: {e}\033[0m")
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
 def add_food_item():
-    print("\n\033[1m\033[94m------ADD A FOOD ITEM------\033[0m")  
-    FoodItemName =input("Enter Food Establishment Name:")
-    FoodItemEstablishmentName =input("Enter Food Item Establishment Name:")
-    FoodItemPrice =input("Enter Food Item Price:")
-    FoodItemCategory=input("Enter Food Item Category:")
-    print("\033[92mSuccessfully Added!\033[0m")
-    #insert to add food item infos 
+    print("\n\033[1m\033[94m------ADD A FOOD ITEM------\033[0m")
+    FoodItemName = input("Enter Food Item Name: ")
+    FoodItemEstablishmentID = input("Enter Food Item Establishment ID: ")
+    FoodItemPrice = input("Enter Food Item Price: ")
+    FoodItemCategory = input("Enter Food Item Category: ")
+
+    try:
+        connection = get_connection()
+        if connection is None:
+            print("\033[91mConnection to database failed.\033[0m")
+            return
+
+        cursor = connection.cursor()
+        insert_query = """
+        INSERT INTO Food_Item (Food_name, Food_price, Food_establishment_id) 
+        VALUES (%s, %s, %s)
+        """
+        cursor.execute(insert_query, (FoodItemName, FoodItemPrice, FoodItemEstablishmentID))
+        connection.commit()
+        
+        # Optionally insert the item type if needed
+        insert_type_query = """
+        INSERT INTO Food_Item_Type (Food_name, Food_item_type) 
+        VALUES (%s, %s)
+        """
+        cursor.execute(insert_type_query, (FoodItemName, FoodItemCategory))
+        connection.commit()
+
+        print("\033[92mSuccessfully Added!\033[0m")
+    except Error as e:
+        print(f"\033[91mError: {e}\033[0m")
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
