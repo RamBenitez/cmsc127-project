@@ -28,7 +28,7 @@ def main():
             exit(1)
 
     # Read schema.sql and execute it
-    schema_path = 'Database/schema.sql' 
+    schema_path = 'schema.sql' 
     with open(schema_path) as f:
         schema_sql = f.read()
 
