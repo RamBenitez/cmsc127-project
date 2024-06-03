@@ -46,19 +46,47 @@ def delete_food_establishment():
         if connection.is_connected():
             connection.close()
     choice = input("Choice: ")
-    # Query to delete the selected food establishment
-    # Delete the food establishment from the database
+    try:
+        connection = get_connection()
+        if connection is None:
+            print("\033[91mConnection to database failed.\033[0m")
+            return
+        
+        cursor = connection.cursor()
+        delete_query = "DELETE FROM Food_Establishment WHERE Food_establishment_id = %s"
+        cursor.execute(delete_query, (choice,))
+        connection.commit()
+        print("\033[92mSuccessfully Deleted!\033[0m")
+    except Error as e:
+        print(f"\033[91mError: {e}\033[0m")
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+
     print("\033[92mSuccessfully Deleted!\033[0m")
 
 def delete_food_item():
     print("\n\033[1m\033[94m------DELETE A FOOD ITEM------\033[0m")
     print("List of all Food Establishments...")
     est_choice = input("Choice: ")
-    # Query to get all food items of the selected food establishment
-    # Print all food items
-    # Query to delete the selected food item
-    # Delete the food item from the database
-    print("\033[92mSuccessfully Deleted!\033[0m")
+    try:
+        connection = get_connection()
+        if connection is None:
+            print("\033[91mConnection to database failed.\033[0m")
+            return
+        
+        cursor = connection.cursor()
+        delete_query = "DELETE FROM Food_Establishment WHERE Food_establishment_id = %s"
+        cursor.execute(delete_query, (choice,))
+        connection.commit()
+        print("\033[92mSuccessfully Deleted!\033[0m")
+    except Error as e:
+        print(f"\033[91mError: {e}\033[0m")
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
 
 def delete_food_review():
     print("\n\033[1m------DELETE A FOOD REVIEW------\033[0m")
