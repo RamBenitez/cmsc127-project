@@ -23,11 +23,12 @@ def search_by_price_range():
     lower_range = float(input("Input lower range: "))
     higher_range = float(input("Input higher range: "))
     
-    # SQL query to retrieve food items within the price range
+    # SQL query to retrieve food items within the price range and their food establishments
     query = """
-    SELECT Food_id, Food_name, Food_price
-    FROM Food_Item
-    WHERE Food_price BETWEEN %s AND %s
+    SELECT fi.Food_id, fi.Food_name, fi.Food_price, fe.Food_establishment_name
+    FROM Food_Item fi
+    JOIN Food_Establishment fe ON fi.Food_establishment_id = fe.Food_establishment_id
+    WHERE fi.Food_price BETWEEN %s AND %s
     """
     params = (lower_range, higher_range)
     
@@ -38,7 +39,7 @@ def search_by_price_range():
     if results:
         print("\nFood Items within the Price Range:")
         for item in results:
-            print(f"Food ID: {item['Food_id']}, Food Name: {item['Food_name']}, Price: {item['Food_price']}")
+            print(f"Food ID: {item['Food_id']}, Food Name: {item['Food_name']}, Price: {item['Food_price']}, Establishment: {item['Food_establishment_name']}")
     else:
         print("No food items found within the specified price range.")
 
@@ -47,11 +48,12 @@ def search_by_food_type():
     print("\n\033[1m\033[94m-----SEARCH BY FOOD TYPE-----\033[0m")
     food_type = input("Input food type: ")
     
-    # SQL query to retrieve food items of the specified food type
+    # SQL query to retrieve food items of the specified food type and their food establishments
     query = """
-    SELECT fi.Food_id, fi.Food_name, fi.Food_price
+    SELECT fi.Food_id, fi.Food_name, fi.Food_price, fe.Food_establishment_name
     FROM Food_Item fi
     JOIN Food_Item_Type fit ON fi.Food_id = fit.Food_id
+    JOIN Food_Establishment fe ON fi.Food_establishment_id = fe.Food_establishment_id
     WHERE fit.Food_item_type = %s
     """
     params = (food_type,)
@@ -63,6 +65,6 @@ def search_by_food_type():
     if results:
         print("Food Items of the Specified Food Type:")
         for item in results:
-            print(f"Food ID: {item['Food_id']}, Food Name: {item['Food_name']}, Price: {item['Food_price']}")
+            print(f"Food ID: {item['Food_id']}, Food Name: {item['Food_name']}, Price: {item['Food_price']}, Establishment: {item['Food_establishment_name']}")
     else:
         print("No food items found for the specified food type.")
