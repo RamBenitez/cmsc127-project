@@ -23,10 +23,10 @@ def login():
 
             if usertype == 'Customer':
                 print("You are logged in as a Customer.")
-                customer_menu(name)
+                customer_menu(username, name)
             elif usertype == 'Owner':
                 print("You are logged in as an Owner.")
-                owner_menu(name)
+                owner_menu(username, name)
 
             return
         else:
