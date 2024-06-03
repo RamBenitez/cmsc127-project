@@ -1,5 +1,6 @@
 from Database.connection import get_connection
-from mysql.connector import Error
+from Database import db_util
+
 
 def add():
     while True:
@@ -21,88 +22,81 @@ def add():
 
 def add_food_establishment():
     print("\n\033[1m\033[94m------ADD A FOOD ESTABLISHMENT------\033[0m")
-    FoodEstablishmentName = input("Enter Food Establishment Name: ")
+    foodEstName = input("Enter Food Establishment Name: ")
     
-    try:
-        connection = get_connection()
-        if connection is None:
-            print("\033[91mConnection to database failed.\033[0m")
-            return
-
-        cursor = connection.cursor()
-        insert_query = """
-        INSERT INTO Food_Establishment (Food_establishment_name) 
+    query = """
+        INSERT INTO Food_Establishment (Food_establishment_name)
         VALUES (%s)
-        """
-        cursor.execute(insert_query, (FoodEstablishmentName,))
-        connection.commit()
-        
-        print("\033[92mSuccessfully Added!\033[0m")
-    except Error as e:
-        print(f"\033[91mError: {e}\033[0m")
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
+        """                                                     # Password() for encrpytion
+    params = (foodEstName, ) 
+    result = db_util.execute_query(query, params)
+    if result:
+        print("\n\033[92mSuccesfully added \033[0m\n" + foodEstName + "\033[0m\n")
+        return True
+    else:
+        print("\n\033[91mFailed to add food establishment. Please try again.\033[0m\n")
+        return False
 
+    # try:
+    #     connection = get_connection()
+    #     if connection is None:
+    #         print("\033[91mConnection to database failed.\033[0m")
+    #         return
+
+    #     cursor = connection.cursor()
+    #     insert_query = """
+    #     INSERT INTO Food_Establishment (Food_establishment_name) 
+    #     VALUES (%s)
+    #     """
+    #     cursor.execute(insert_query, (FoodEstablishmentName,))
+    #     connection.commit()
+        
+    #     print("\033[92mSuccessfully Added!\033[0m")
+    # except Error as e:
+    #     print(f"\033[91mError: {e}\033[0m")
+    # finally:
+    #     if connection.is_connected():
+    #         cursor.close()
+    #         connection.close()
+            
 def add_food_item():
     print("\n\033[1m\033[94m------ADD A FOOD ITEM------\033[0m")
-    try:
-        connection = get_connection()
-        if connection is None:
-            print("\033[91mConnection to database failed.\033[0m")
-            return
-        
-        cursor = connection.cursor()
-        cursor.execute("SELECT Food_establishment_id, Food_establishment_name FROM Food_Establishment")
-        establishments = cursor.fetchall()
-        
-        print("List of Food Establishments:")
-        for est in establishments:
-            print(f"ID: {est[0]}, Name: {est[1]}")
-            
-        cursor.close()
-    except Error as e:
-        print(f"\033[91mError: {e}\033[0m")
-        return
-    finally:
-        if connection.is_connected():
-            connection.close()
-            
-    FoodItemEstablishmentID = input("Enter Food Establishment ID of where to add food: ")
-    FoodItemName = input("Enter Food Name: ")
-    FoodItemPrice = input("Enter Food Price: ")
-    FoodItemCategory = input("Enter Food Category: ")
+    selectAllFoodEst = "select * from Food_Establishment"
+    resultAllFoodEst = db_util.execute_query(selectAllFoodEst, None, True)
+    print("List of Food Establishments")
+    for i in resultAllFoodEst:
+        print(f"{i['Food_establishment_id']}: {i['Food_establishment_name']}")
 
-    try:
-        connection = get_connection()
-        if connection is None:
-            print("\033[91mConnection to database failed.\033[0m")
-            return
+    foodEstID = input("Enter Food Establishment ID of where to add food: ")
+    foodName = input("Enter Food Name: ")
+    foodPrice = input("Enter Food Price: ")
+    foodCategory = input("Enter Food Category/ies (separated by comma ,): ")
+    category_list = foodCategory.split(",")
 
-        cursor = connection.cursor()
-        insert_query = """
-        INSERT INTO Food_Item (Food_name, Food_price, Food_establishment_id) 
+    addFoodItem = """
+        INSERT INTO Food_Item (Food_name, Food_price, Food_establishment_id)
         VALUES (%s, %s, %s)
-        """
-        cursor.execute(insert_query, (FoodItemName, FoodItemPrice, FoodItemEstablishmentID))
-        connection.commit()
-        
+    """                                                     
+    addFoodItemParams = (foodName, foodPrice, foodEstID) 
+    addFoodItemResult = db_util.execute_query(addFoodItem, addFoodItemParams)
 
-        Food_id = cursor.lastrowid
-        
-        # Insert the food item type
-        insert_type_query = """
-        INSERT INTO Food_Item_Type (Food_id, Food_item_type) 
+    # Retrieve the last inserted ID
+    getLastInsertId = "select max(Food_id) as Food_id from Food_Item"
+    selectMaxFoodID_result = db_util.execute_query(getLastInsertId, None, True)
+    foodID = selectMaxFoodID_result[0]['Food_id']
+
+    addFoodItemType = """
+        INSERT INTO Food_Item_Type (Food_id, Food_item_type)
         VALUES (%s, %s)
-        """
-        cursor.execute(insert_type_query, (Food_id, FoodItemCategory))
-        connection.commit()
+    """
+    for category in category_list:
+        addFoodItemTypeParams = (foodID, category.strip()) 
+        db_util.execute_query(addFoodItemType, addFoodItemTypeParams)
 
-        print("\033[92mSuccessfully Added!\033[0m")
-    except Error as e:
-        print(f"\033[91mError: {e}\033[0m")
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
+    if addFoodItemResult:
+        print("\n\033[92mFood item added successfully!\033[0m\n")
+        return True
+    else:
+        print("\n\033[91mFailed to add food item. Please try again.\033[0m\n")
+        return False
+

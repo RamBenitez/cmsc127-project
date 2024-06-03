@@ -1,4 +1,5 @@
-CREATE DATABASE IF NOT EXISTS cmsc127_project;
+DROP DATABASE cmsc127_project;
+CREATE DATABASE cmsc127_project;
 USE cmsc127_project;
 
 CREATE OR REPLACE TABLE User (
@@ -34,10 +35,8 @@ CREATE OR REPLACE TABLE Food_Item (
 );
 
 CREATE OR REPLACE TABLE Food_Item_Type (
-    Food_id INT NOT NULL AUTO_INCREMENT,
-    Food_name VARCHAR(50) NOT NULL,
-    Food_item_type VARCHAR(50) NOT NULL,
-    PRIMARY KEY (Food_id),
+    Food_id INT NOT NULL,
+    Food_item_type VARCHAR(10) NOT NULL,
     CONSTRAINT Food_Item_Type_Food_id_fk 
         FOREIGN KEY(Food_id) REFERENCES Food_Item(Food_id)
 );
