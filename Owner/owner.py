@@ -4,15 +4,15 @@ from .reports import reports
 from .search import search
 from .update import update
 
-def owner_menu(name,username):
+def owner_menu(name, username):
     while True:
-        print(f"\nWelcome, {name}!\n") #dummy palang
+        print(f"\nWelcome, {name}!\n")
         print("\033[1m\033[94m—---------- MENU —----\033[0m")
         print("[1] Add")
         print("[2] Update")
         print("[3] Delete")
         print("[4] Search")
-        print("[5] reports")
+        print("[5] Reports")
         print("[6] Log out")
         print("[0] Exit")
 

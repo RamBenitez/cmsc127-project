@@ -27,37 +27,15 @@ def add_food_establishment():
     query = """
         INSERT INTO Food_Establishment (Food_establishment_name)
         VALUES (%s)
-        """                                                     # Password() for encrpytion
+        """                                            
     params = (foodEstName, ) 
     result = db_util.execute_query(query, params)
     if result:
-        print("\n\033[92mSuccesfully added \033[0m\n" + foodEstName + "\033[0m\n")
+        print(f"\n\033[92mSuccessfully added {foodEstName}\033[0m\n")
         return True
     else:
         print("\n\033[91mFailed to add food establishment. Please try again.\033[0m\n")
         return False
-
-    # try:
-    #     connection = get_connection()
-    #     if connection is None:
-    #         print("\033[91mConnection to database failed.\033[0m")
-    #         return
-
-    #     cursor = connection.cursor()
-    #     insert_query = """
-    #     INSERT INTO Food_Establishment (Food_establishment_name) 
-    #     VALUES (%s)
-    #     """
-    #     cursor.execute(insert_query, (FoodEstablishmentName,))
-    #     connection.commit()
-        
-    #     print("\033[92mSuccessfully Added!\033[0m")
-    # except Error as e:
-    #     print(f"\033[91mError: {e}\033[0m")
-    # finally:
-    #     if connection.is_connected():
-    #         cursor.close()
-    #         connection.close()
             
 def add_food_item():
     print("\n\033[1m\033[94m------ADD A FOOD ITEM------\033[0m")
