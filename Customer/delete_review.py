@@ -40,6 +40,18 @@ def delete_food_review(username):
     # Customer selects a review to delete
     review_choice = input("\nEnter the Review ID to delete: ")
 
+  # Check if the review ID exists and belongs to the user
+    review_exists_query = """
+    SELECT * FROM Food_Review
+    WHERE Food_review_id = %s AND Username = %s AND Food_id IS NOT NULL
+    """
+    review_exists_params = (review_choice, username)
+    review_exists = db_util.execute_query(review_exists_query, review_exists_params, fetch=True)
+    
+    if not review_exists:
+        print("\n\033[91mInvalid Review ID. Please try again.\033[0m\n")
+        return
+
     # Delete the review from the database
     delete_query = "DELETE FROM Food_Review WHERE Food_review_id = %s AND Username = %s"
     delete_params = (review_choice, username)
@@ -74,6 +86,18 @@ def delete_food_establishment_review(username):
     # Customer selects a review to delete
     review_choice = input("\nEnter the Review ID to delete: ")
 
+    # Check if the review ID exists and belongs to the user
+    review_exists_query = """
+    SELECT * FROM Food_Review
+    WHERE Food_review_id = %s AND Username = %s AND Food_establishment_id IS NOT NULL
+    """
+    review_exists_params = (review_choice, username)
+    review_exists = db_util.execute_query(review_exists_query, review_exists_params, fetch=True)
+    
+    if not review_exists:
+        print("\n\033[91mInvalid Review ID. Please try again.\033[0m\n")
+        return
+
     # Delete the review from the database
     delete_query = "DELETE FROM Food_Review WHERE Food_review_id = %s AND Username = %s"
     delete_params = (review_choice, username)
@@ -81,6 +105,6 @@ def delete_food_establishment_review(username):
 
     # Delete the review from the database
     if result:
-        print("\n\033[92mSuccessfully deleted review of the food establishment}!\033[0m\n")
+        print("\n\033[92mSuccessfully deleted review of the food establishment!\033[0m\n")
     else:
         print("\n\033[91mFailed to delete review. Please try again.\033[0m\n")
