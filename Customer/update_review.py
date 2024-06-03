@@ -17,6 +17,17 @@ def update_review(username):
         else:
             print("\n\033[91mInvalid choice. Please try again.\033[0m")
 
+def get_valid_rating():
+    while True:
+        try:
+            rating = int(input("New Rating (1-5): "))
+            if 1 <= rating <= 5:
+                return rating
+            else:
+                print("\n\033[91mInvalid rating. Please enter a value between 1 and 5.\033[0m")
+        except ValueError:
+            print("\n\033[91mInvalid input. Please enter a number between 1 and 5.\033[0m")
+
 # Update review of a food item
 def update_food_review(username):
     print("\n\033[1m\033[94m-----UPDATE FOOD REVIEW-----\033[0m")
@@ -41,7 +52,20 @@ def update_food_review(username):
     
     # Customer selects a review to update
     review_choice = input("\nEnter the Review ID to update: ")
-    new_rating = input("New Rating (1-5): ")
+
+    # Check if the review ID exists and belongs to the user
+    review_exists_query = """
+    SELECT * FROM Food_Review
+    WHERE Food_review_id = %s AND Username = %s AND Food_id IS NOT NULL
+    """
+    review_exists_params = (review_choice, username)
+    review_exists = db_util.execute_query(review_exists_query, review_exists_params, fetch=True)
+    
+    if not review_exists:
+        print("\n\033[91mInvalid Review ID. Please try again.\033[0m\n")
+        return
+    
+    new_rating = get_valid_rating()
     new_content = input("New Content: ")
 
     # Update the review in the database
@@ -83,7 +107,20 @@ def update_food_establishment_review(username):
     
     # Customer selects a review to update
     review_choice = input("\nEnter the Review ID to update: ")
-    new_rating = input("New Rating (1-5): ")
+
+    # Check if the review ID exists and belongs to the user
+    review_exists_query = """
+    SELECT * FROM Food_Review
+    WHERE Food_review_id = %s AND Username = %s AND Food_establishment_id IS NOT NULL AND Food_id IS NULL
+    """
+    review_exists_params = (review_choice, username)
+    review_exists = db_util.execute_query(review_exists_query, review_exists_params, fetch=True)
+    
+    if not review_exists:
+        print("\n\033[91mInvalid Review ID. Please try again.\033[0m\n")
+        return
+
+    new_rating = get_valid_rating()
     new_content = input("New Content: ")
 
     # Update the review in the database
