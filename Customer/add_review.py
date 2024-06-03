@@ -33,6 +33,10 @@ def add_food_review(username):
     for item in food_items:
         print(f"Food ID: {item['Food_id']}, Food Name: {item['Food_name']}, Establishment ID: {item['Food_establishment_id']}, Establishment Name: {item['Food_establishment_name']}")
     
+    if not food_items:
+            print("\n\033[91mNo food items available to review.\033[0m\n")
+            return
+
     food_item_id = input("\nEnter the Food Item ID: ")
     food_establishment_id = input("Enter the Food Establishment ID: ")
     rating = int(input("Rating (1-5): ")) #TODO restriction on input
@@ -62,6 +66,10 @@ def add_food_establishment_review(username):
     for establishment in food_establishments:
         print(f"{establishment['Food_establishment_id']}: {establishment['Food_establishment_name']}")
     
+    if not food_establishments:
+            print("\n\033[91mNo food establishments available to review.\033[0m\n")
+            return
+
     food_establishment_id = input("\nEnter the Food Establishment ID: ")
     rating = int(input("Rating (1-5): ")) #TODO restriction on input
     content = input("Review: ")
