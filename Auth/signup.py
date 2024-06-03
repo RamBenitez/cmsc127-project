@@ -20,7 +20,6 @@ def signup():
                     customer_menu(name)  
                     break
                 else:
-                    print("\033[91mLogin failed. Please try again.\033[0m")
                     login()
         elif choice == '2':
             if signup_owner():
@@ -29,7 +28,6 @@ def signup():
                     owner_menu(name)
                     break  
                 else:
-                    print("\033[91mLogin failed. Please try again.\033[0m")
                     login()
         elif choice == '3':
             break
@@ -54,14 +52,8 @@ def signup_customer():
         return False
     else:
 
-        # converting password to array of bytes 
-        encodedPass = customerPassword.encode('utf-8') 
-        
-        # generating the salt 
-        salt = bcrypt.gensalt() 
-        
-        # Hashing the password 
-        hashedPW = bcrypt.hashpw(encodedPass, salt) 
+        # encrypting the password
+        hashedPW = encodePass(customerPassword)
 
         # Save the new customer to the database
         query = """
@@ -91,14 +83,8 @@ def signup_owner():
         return False
     else:
 
-        # converting password to array of bytes 
-        encodedPass = ownerPassword.encode('utf-8') 
-        
-        # generating the salt 
-        salt = bcrypt.gensalt() 
-        
-        # Hashing the password 
-        hashedPW = bcrypt.hashpw(encodedPass, salt)
+        # encrypting the password
+        hashedPW = encodePass(ownerPassword)
 
         # Save the new owner to the database
         query = """
@@ -114,3 +100,12 @@ def signup_owner():
             print("\n\033[91mFailed to sign up. Please try again.\033[0m\n")
             return False
   
+def encodePass(toEncode):
+        # converting password to array of bytes 
+        encodedPass = toEncode.encode('utf-8') 
+        
+        # generating the salt 
+        salt = bcrypt.gensalt() 
+        
+        # Hashing the password 
+        return bcrypt.hashpw(encodedPass, salt) 
