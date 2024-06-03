@@ -2,7 +2,7 @@ from Database import db_util
 
 # Search food items from any establishment based on a given price range and/or food type.
 
-def search():
+def search(username):
     while True:
         print("\n\033[1m\033[94m------SEARCH MENU------\033[0m")
         print("[1] Search for food items by given price range")

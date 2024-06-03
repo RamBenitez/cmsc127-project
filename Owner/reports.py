@@ -1,6 +1,6 @@
 from Database import db_util
 
-def reports():
+def reports(username):
     while True:
         print("\n\033[1m\033[94m------REPORTS MENU------\033[0m") 
         print("[1] View all food establishments")

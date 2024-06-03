@@ -1,7 +1,8 @@
 from Database import db_util
-from Owner.reports import view_food_est, view_food_items_est
+from .reports import view_food_est, view_food_items_est
 
-def update():
+
+def update(username):
     while True:
         print("\n\033[1m\033[94m------UPDATE MENU------\033[0m") 
         print("[1] Update a food establishment")
@@ -51,7 +52,7 @@ def update_food_item():
     new_name = input("Enter New Food Item Name: ")
     new_price = input("Enter New Food Item Price: ")
     new_category = input("Enter New Food Item Category: ")
-    query = "update Food_Item set Food_name=%s, Food_price=%s where Food_id=%s"                                               # Password() for encrpytion
+    query = "update Food_Item set Food_name=%s, Food_price=%s where Food_id=%s"                                              
     params = (new_name, new_price, choice) 
     result = db_util.execute_query(query, params)
 

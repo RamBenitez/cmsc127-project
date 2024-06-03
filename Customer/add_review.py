@@ -17,6 +17,17 @@ def add_review(username):
         else:
             print("\n\033[91mInvalid choice. Please try again.\033[0m")
 
+def get_valid_rating():
+    while True:
+        try:
+            rating = int(input("New Rating (1-5): "))
+            if 1 <= rating <= 5:
+                return rating
+            else:
+                print("\n\033[91mInvalid rating. Please enter a value between 1 and 5.\033[0m")
+        except ValueError:
+            print("\n\033[91mInvalid input. Please enter a number between 1 and 5.\033[0m")
+
 # Add food review on a food item
 def add_food_review(username):
     print("\n\033[1m\033[94m-----ADD FOOD REVIEW-----\033[0m")
@@ -33,9 +44,31 @@ def add_food_review(username):
     for item in food_items:
         print(f"Food ID: {item['Food_id']}, Food Name: {item['Food_name']}, Establishment ID: {item['Food_establishment_id']}, Establishment Name: {item['Food_establishment_name']}")
     
-    food_item_id = input("\nEnter the Food Item ID: ")
-    food_establishment_id = input("Enter the Food Establishment ID: ")
-    rating = int(input("Rating (1-5): ")) #TODO restriction on input
+    if not food_items:
+            print("\n\033[91mNo food items available to review.\033[0m\n")
+            return
+
+    while True:
+        food_item_id = input("\nEnter the Food Item ID: ")
+        # Check if the food item ID is valid
+        valid_food_item_query = "SELECT Food_id FROM Food_Item WHERE Food_id = %s"
+        valid_food_item = db_util.execute_query(valid_food_item_query, (food_item_id,), fetch=True)
+        if valid_food_item:
+            break
+        else:
+            print("\n\033[91mInvalid Food Item ID. Please try again.\033[0m")
+    
+    while True:
+        food_establishment_id = input("Enter the Food Establishment ID: ")
+        # Check if the food establishment ID is valid
+        valid_food_establishment_query = "SELECT Food_establishment_id FROM Food_Establishment WHERE Food_establishment_id = %s"
+        valid_food_establishment = db_util.execute_query(valid_food_establishment_query, (food_establishment_id,), fetch=True)
+        if valid_food_establishment:
+            break
+        else:
+            print("\n\033[91mInvalid Food Establishment ID. Please try again.\033[0m")
+
+    rating = get_valid_rating()
     content = input("Review: ")
 
     # Insert the review into Food_Review table
@@ -62,8 +95,21 @@ def add_food_establishment_review(username):
     for establishment in food_establishments:
         print(f"{establishment['Food_establishment_id']}: {establishment['Food_establishment_name']}")
     
-    food_establishment_id = input("\nEnter the Food Establishment ID: ")
-    rating = int(input("Rating (1-5): ")) #TODO restriction on input
+    if not food_establishments:
+            print("\n\033[91mNo food establishments available to review.\033[0m\n")
+            return
+
+    while True:
+        food_establishment_id = input("\nEnter the Food Establishment ID: ")
+        # Check if the food establishment ID is valid
+        valid_food_establishment_query = "SELECT Food_establishment_id FROM Food_Establishment WHERE Food_establishment_id = %s"
+        valid_food_establishment = db_util.execute_query(valid_food_establishment_query, (food_establishment_id,), fetch=True)
+        if valid_food_establishment:
+            break
+        else:
+            print("\n\033[91mInvalid Food Establishment ID. Please try again.\033[0m")
+            
+    rating = get_valid_rating()
     content = input("Review: ")
 
     # Insert the review into Food_Review table

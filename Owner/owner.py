@@ -4,7 +4,8 @@ from .reports import reports
 from .search import search
 from .update import update
 
-def owner_menu(name, username):
+
+def owner_menu(username, name):
     while True:
         print(f"\nWelcome, {name}!\n")
         print("\033[1m\033[94m—---------- MENU —----\033[0m")
@@ -19,15 +20,16 @@ def owner_menu(name, username):
         choice = input("\nEnter your choice: ")
 
         if choice == '1':
-            add()
+            print(username)
+            add(username)
         elif choice == '2':
-            update()
+            update(username)
         elif choice == '3':
-            delete()
+            delete(username)
         elif choice == '4':
-            search()
+            search(username)
         elif choice == '5':
-            reports()
+            reports(username)
         elif choice == '6':
             print("Logging out.")
             break

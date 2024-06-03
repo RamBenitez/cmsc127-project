@@ -43,13 +43,17 @@ def search_by_rating():
     print("\n\033[1m\033[94m-----SEARCH BY RATING-----\033[0m")
     lower_range = float(input("Input lower range: "))
     higher_range = float(input("Input higher range: "))
-    # query to retrieve food establishments within the rating range
+
+    # Query to retrieve food establishments within the rating range
     query = """
-    SELECT fe.Food_establishment_id, fe.Food_establishment_name, fer.Food_establishment_rating
+    SELECT fe.Food_establishment_id, fe.Food_establishment_name, AVG(fr.Rating) as avg_rating
     FROM Food_Establishment fe
-    JOIN Food_Establishment_Rating fer ON fe.Food_establishment_id = fer.Food_establishment_id
-    WHERE fer.Food_establishment_rating BETWEEN %s AND %s
+    JOIN Food_Review fr ON fe.Food_establishment_id = fr.Food_establishment_id
+    WHERE fr.Food_id IS NULL
+    GROUP BY fe.Food_establishment_id, fe.Food_establishment_name
+    HAVING avg_rating BETWEEN %s AND %s
     """
+
     params = (lower_range, higher_range)
     # Execute the query
     results = db_util.execute_query(query, params, fetch=True)
@@ -57,6 +61,6 @@ def search_by_rating():
     if results:
         print("\nFood Establishments within the Rating Range:")
         for establishment in results:
-            print(f"Establishment ID: {establishment['Food_establishment_id']}, Name: {establishment['Food_establishment_name']}, Rating: {establishment['Food_establishment_rating']}")
+            print(f"Establishment ID: {establishment['Food_establishment_id']}, Name: {establishment['Food_establishment_name']}, Rating: {establishment['avg_rating']:.2f}")
     else:
         print("\nNo food establishments found within the specified rating range.")
