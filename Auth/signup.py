@@ -2,6 +2,7 @@ from .login import login
 from Customer.customer import customer_menu
 from Owner.owner import owner_menu
 from Database import db_util
+import bcrypt # for hashing passwords
 
 def signup():
     while True:
@@ -52,12 +53,22 @@ def signup_customer():
         print("\n\033[91mPasswords do not match. Please try again.\033[0m\n")
         return False
     else:
+
+        # converting password to array of bytes 
+        encodedPass = customerPassword.encode('utf-8') 
+        
+        # generating the salt 
+        salt = bcrypt.gensalt() 
+        
+        # Hashing the password 
+        hashedPW = bcrypt.hashpw(encodedPass, salt) 
+
         # Save the new customer to the database
         query = """
         INSERT INTO User (Username, Password, Name, Usertype)
         VALUES (%s, Password(%s), %s, 'Customer')
         """                                                     # Password() for encrpytion
-        params = (customerUsername, customerPassword, customerName) 
+        params = (customerUsername, hashedPW, customerName) 
         result = db_util.execute_query(query, params)
         if result:
             print("\n\033[92mCustomer signed up successfully!\033[0m\n")
@@ -79,12 +90,22 @@ def signup_owner():
         print("\n\033[91mPasswords do not match. Please try again.\033[0m\n")
         return False
     else:
+
+        # converting password to array of bytes 
+        encodedPass = ownerPassword.encode('utf-8') 
+        
+        # generating the salt 
+        salt = bcrypt.gensalt() 
+        
+        # Hashing the password 
+        hashedPW = bcrypt.hashpw(encodedPass, salt)
+
         # Save the new owner to the database
         query = """
         INSERT INTO User (Username, Password, Name, Usertype)
         VALUES (%s, Password(%s), %s, 'Owner')
         """                                                     # Password() for encrpytion
-        params = (ownerUsername, ownerPassword, ownerName) 
+        params = (ownerUsername, hashedPW, ownerName) 
         result = db_util.execute_query(query, params)
         if result:
             print("\n\033[92mOwner signed up successfully!\033[0m\n")
