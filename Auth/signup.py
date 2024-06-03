@@ -52,7 +52,7 @@ def signup_customer():
         print("\n\033[91mPasswords do not match. Please try again.\033[0m\n")
         return False
     else:
-        #Save the new customer to the database
+        # Save the new customer to the database
         query = """
         INSERT INTO User (Username, Password, Name, Usertype)
         VALUES (%s, Password(%s), %s, 'Customer')
@@ -79,8 +79,17 @@ def signup_owner():
         print("\n\033[91mPasswords do not match. Please try again.\033[0m\n")
         return False
     else:
-        #Save the new owner to the database
-        print("\n\033[92mOwner signed up successfully!\033[0m\n")
-        return True
-
+        # Save the new owner to the database
+        query = """
+        INSERT INTO User (Username, Password, Name, Usertype)
+        VALUES (%s, Password(%s), %s, 'Owner')
+        """                                                     # Password() for encrpytion
+        params = (ownerUsername, ownerPassword, ownerName) 
+        result = db_util.execute_query(query, params)
+        if result:
+            print("\n\033[92mOwner signed up successfully!\033[0m\n")
+            return True
+        else:
+            print("\n\033[91mFailed to sign up. Please try again.\033[0m\n")
+            return False
   
