@@ -1,4 +1,4 @@
-def add_review():
+def add_review(username):
     while True:
         print("\n\033[1m\033[94m------ADD REVIEW MENU------\033[0m")
         print("[1] Add a review on a food item")
@@ -7,7 +7,7 @@ def add_review():
         choice = input("\nEnter your choice: ")
 
         if choice == '1':
-            add_food_review()
+            add_food_review(username)
         elif choice == '2':
             add_food_establishment_review()
         elif choice == '3':
@@ -16,7 +16,7 @@ def add_review():
             print("\n\033[91mInvalid choice. Please try again.\033[0m")
 
 #Add food review on a food item
-def add_food_review():
+def add_food_review(username):
     print("\n\033[1m\033[94m-----ADD FOOD REVIEW-----\033[0m")
     #QUery to show  all the food items
     print("List of Food Items: ")

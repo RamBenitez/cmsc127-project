@@ -15,20 +15,14 @@ def signup():
 
         if choice == '1':
             if signup_customer():
-                name = login()
-                if name:
-                    customer_menu(name)  
-                    break
-                else:
-                    login()
+                login()    
+            else:
+                print("\033[91mLogin failed. Please try again.\033[0m")
         elif choice == '2':
             if signup_owner():
-                name = login()
-                if name:
-                    owner_menu(name)
-                    break  
-                else:
-                    login()
+                login()
+            else:
+                print("\033[91mLogin failed. Please try again.\033[0m")
         elif choice == '3':
             break
         elif choice == '0':
