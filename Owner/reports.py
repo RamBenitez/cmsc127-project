@@ -1,14 +1,5 @@
 from Database import db_util
 
-# 
-# V
-# ;
-# 
-
-# View all food items from an establishment arranged according to price;
-# Search food items from any establishment based on a given price range and/or food type.
-
-
 def reports():
     while True:
         print("\n\033[1m\033[94m------REPORTS MENU------\033[0m") 
