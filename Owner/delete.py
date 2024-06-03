@@ -31,7 +31,7 @@ def delete_food_establishment():
 
     # Query to delete the selected food establishment
     delFoodEst = "delete from Food_Establishment where Food_establishment_id=%s"                                                  
-    delFoodEstParams = (foodEstID) 
+    delFoodEstParams = (foodEstID, ) 
 
     # Delete the food establishment from the database
     delFoodEstResult = db_util.execute_query(delFoodEst, delFoodEstParams)
@@ -72,6 +72,11 @@ def delete_food_item():
 
     print("\nPick the Food ID you want to delete.")
     foodID = int(input("Choice: "))
+
+    # Query to delete all food types of food item in food item type
+    delFoodTypes = "delete from Food_Item_Type where Food_id=%s"
+    delFoodTypesParams = (foodID, )
+    db_util.execute_query(delFoodTypes, delFoodTypesParams)
 
     # Query to delete the selected food item
     delFoodItem = "delete from Food_Item where Food_id=%s and Food_establishment_id=%s"
