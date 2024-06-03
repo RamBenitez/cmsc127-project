@@ -22,13 +22,13 @@ def owner_menu(username, name):
             print(username)
             add(username)
         elif choice == '2':
-            update()
+            update(username)
         elif choice == '3':
-            delete()
+            delete(username)
         elif choice == '4':
-            search()
+            search(username)
         elif choice == '5':
-            reports()
+            reports(username)
         elif choice == '6':
             print("Logging out.")
             break

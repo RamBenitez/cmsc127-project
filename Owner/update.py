@@ -1,7 +1,7 @@
 from Database import db_util
 from .reports import view_food_est, view_food_items_est
 
-def update():
+def update(username):
     while True:
         print("\n\033[1m\033[94m------UPDATE MENU------\033[0m") 
         print("[1] Update a food establishment")
