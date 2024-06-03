@@ -23,18 +23,20 @@ def delete_food_establishment():
     print("\n\033[1m\033[94m------DELETE A FOOD ESTABLISHMENT------\033[0m")  
     # Query to get all food establishments
     # Print all food establishments
-    print("Food Establishments...")
+    print("List of all Food Establishments...")
     choice = input("Choice: ")
     # Query to delete the selected food establishment
     # Delete the food establishment from the database
     print("\033[92mSuccessfully Deleted!\033[0m")
 
 def delete_food_item():
-    print("\n\033[1m\033[94m------DELETE A FOOD ITEM------\033[0m")  
+    print("\n\033[1m\033[94m------DELETE A FOOD ITEM------\033[0m")
+    print("List of all Food Establishments...")
+    est_choice = input("Choice: ")  
     # Query to get all food items of the selected food establishment
     # Print all food items
-    print("Food Items:")
-    choice = input("Choice: ")
+    print("List of all Food Items in :")
+    food_choice = input("Choice: ")
     # Query to delete the selected food item
     # Delete the food item from the database
     print("\033[92mSuccessfully Deleted!\033[0m")
@@ -43,7 +45,7 @@ def delete_food_review():
     print("\n\033[1m------DELETE A FOOD REVIEW------\033[0m")  
     # Query to get all food reviews
     # Print all food reviews
-    print("Food Reviews...")
+    print("List of all Food Reviews...")
     choice = input("Choice: ")
     # Query to delete the selected food review
     # Delete the food review from the database

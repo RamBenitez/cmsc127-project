@@ -7,8 +7,8 @@ def login():
     valid_name="Alice Guo"
 
     print("\n\033[1m\033[94m-----------LOG IN -----------\033[0m")
-    username= input("Enter username:")
-    password= input("Enter password:")
+    username= input("Enter username: ")
+    password= input("Enter password: ")
 
     #successfull login
     if username == valid_username and password == valid_password:

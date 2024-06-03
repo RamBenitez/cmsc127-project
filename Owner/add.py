@@ -46,10 +46,11 @@ def add_food_establishment():
             connection.close()
 def add_food_item():
     print("\n\033[1m\033[94m------ADD A FOOD ITEM------\033[0m")
-    FoodItemName = input("Enter Food Item Name: ")
-    FoodItemEstablishmentID = input("Enter Food Item Establishment ID: ")
-    FoodItemPrice = input("Enter Food Item Price: ")
-    FoodItemCategory = input("Enter Food Item Category: ")
+    print("List of Food Establishments")
+    FoodItemEstablishmentID = input("Enter Food Establishment ID of where to add food: ")
+    FoodItemName = input("Enter Food Name: ")
+    FoodItemPrice = input("Enter Food Price: ")
+    FoodItemCategory = input("Enter Food Category: ")
 
     try:
         connection = get_connection()
