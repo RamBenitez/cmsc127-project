@@ -25,7 +25,7 @@ CREATE OR REPLACE TABLE Food_Establishment_Rating (
 
 CREATE OR REPLACE TABLE Food_Item (
     Food_id INT NOT NULL AUTO_INCREMENT,
-    Food_name VARCHAR(20) NOT NULL,
+    Food_name VARCHAR(50) NOT NULL,
     Food_price INT NOT NULL,
     Food_establishment_id INT NOT NULL,
     PRIMARY KEY (Food_id),
@@ -35,8 +35,8 @@ CREATE OR REPLACE TABLE Food_Item (
 
 CREATE OR REPLACE TABLE Food_Item_Type (
     Food_id INT NOT NULL AUTO_INCREMENT,
-    Food_name VARCHAR(20) NOT NULL,
-    Food_item_type VARCHAR(10) NOT NULL,
+    Food_name VARCHAR(50) NOT NULL,
+    Food_item_type VARCHAR(50) NOT NULL,
     PRIMARY KEY (Food_id),
     CONSTRAINT Food_Item_Type_Food_id_fk 
         FOREIGN KEY(Food_id) REFERENCES Food_Item(Food_id)
