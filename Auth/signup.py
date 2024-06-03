@@ -1,6 +1,7 @@
 from .login import login 
 from Customer.customer import customer_menu
 from Owner.owner import owner_menu
+from Database import db_util
 
 def signup():
     while True:
@@ -38,7 +39,7 @@ def signup():
             print("\033[91mInvalid choice. Please try again.\033[0m")  
 
 
- #Sign up as customer             
+# Sign up as customer             
 def signup_customer():
     
     print("\n\033[1m\033[94m-----SIGN UP AS CUSTOMER -----\033[0m")
@@ -52,11 +53,21 @@ def signup_customer():
         return False
     else:
         #Save the new customer to the database
-        print("\n\033[92mCustomer signed up successfully!\033[0m\n")
-        return True
+        query = """
+        INSERT INTO User (Username, Password, Name, Usertype)
+        VALUES (%s, Password(%s), %s, 'Customer')
+        """                                                     # Password() for encrpytion
+        params = (customerUsername, customerPassword, customerName) 
+        result = db_util.execute_query(query, params)
+        if result:
+            print("\n\033[92mCustomer signed up successfully!\033[0m\n")
+            return True
+        else:
+            print("\n\033[91mFailed to sign up. Please try again.\033[0m\n")
+            return False
 
 
-#sign up as customer
+# Sign up as an owner
 def signup_owner():
     print("\n\033[1m\033[94m-----SIGN UP AS OWNER -----\033[0m")
     ownerName= input("Enter name: ")
