@@ -26,8 +26,9 @@ def add_food_establishment(username):
     query = """
         INSERT INTO Food_Establishment (Food_establishment_name)
         VALUES (%s)
-    """
+        """                                            
     params = (foodEstName,) 
+
     result = db_util.execute_query(query, params)
     
     if result:
@@ -55,6 +56,7 @@ def add_food_establishment(username):
     else:
         print("\n\033[91mFailed to add food establishment. Please try again.\033[0m\n")
         return False
+
 
             
 def add_food_item(username):
