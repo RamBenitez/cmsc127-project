@@ -66,7 +66,7 @@ def signup_customer():
         # Save the new customer to the database
         query = """
         INSERT INTO User (Username, Password, Name, Usertype)
-        VALUES (%s, Password(%s), %s, 'Customer')
+        VALUES (%s, %s, %s, 'Customer')
         """                                                     # Password() for encrpytion
         params = (customerUsername, hashedPW, customerName) 
         result = db_util.execute_query(query, params)
@@ -103,7 +103,7 @@ def signup_owner():
         # Save the new owner to the database
         query = """
         INSERT INTO User (Username, Password, Name, Usertype)
-        VALUES (%s, Password(%s), %s, 'Owner')
+        VALUES (%s, %s, %s, 'Owner')
         """                                                     # Password() for encrpytion
         params = (ownerUsername, hashedPW, ownerName) 
         result = db_util.execute_query(query, params)
