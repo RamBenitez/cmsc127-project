@@ -31,7 +31,7 @@ def add_food_establishment():
     params = (foodEstName, ) 
     result = db_util.execute_query(query, params)
     if result:
-        print("\n\033[92mSuccesfully added \033[0m\n" + foodEstName + "\033[0m\n")
+        print("\n\033[92mSuccesfully added:\033[0m " + foodEstName + "\033[0m\n")
         return True
     else:
         print("\n\033[91mFailed to add food establishment. Please try again.\033[0m\n")

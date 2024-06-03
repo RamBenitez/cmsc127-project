@@ -12,7 +12,7 @@ def owner_menu(name,username):
         print("[2] Update")
         print("[3] Delete")
         print("[4] Search")
-        print("[5] reports")
+        print("[5] Reports")
         print("[6] Log out")
         print("[0] Exit")
 
