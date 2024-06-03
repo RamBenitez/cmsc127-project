@@ -41,11 +41,11 @@ def signup():
  #Sign up as customer             
 def signup_customer():
     
-    print("\n\033[1m\033[94m-----SIGN UP CUSTOMER -----\033[0m")
-    customerName= input("Enter name:")
-    customerUsername= input("Enter username:")
-    customerPassword= input("Enter password:")
-    customerConfirmPassword= input("Confirm password:")
+    print("\n\033[1m\033[94m-----SIGN UP AS CUSTOMER -----\033[0m")
+    customerName= input("Enter name: ")
+    customerUsername= input("Enter username: ")
+    customerPassword= input("Enter password: ")
+    customerConfirmPassword= input("Confirm password: ")
 
     if customerPassword != customerConfirmPassword:
         print("\n\033[91mPasswords do not match. Please try again.\033[0m\n")
@@ -58,11 +58,11 @@ def signup_customer():
 
 #sign up as customer
 def signup_owner():
-    print("\n\033[1m\033[94m-----SIGN UP OWNER -----\033[0m")
-    ownerName= input("Enter name:")
-    ownerUsername= input("Enter username:")
-    ownerPassword= input("Enter password:")
-    ownerConfirmPassword= input("Confirm password:")
+    print("\n\033[1m\033[94m-----SIGN UP AS OWNER -----\033[0m")
+    ownerName= input("Enter name: ")
+    ownerUsername= input("Enter username: ")
+    ownerPassword= input("Enter password: ")
+    ownerConfirmPassword= input("Confirm password: ")
 
     if ownerPassword != ownerConfirmPassword:
         print("\n\033[91mPasswords do not match. Please try again.\033[0m\n")

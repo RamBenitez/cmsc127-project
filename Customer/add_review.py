@@ -17,14 +17,13 @@ def add_review():
 
 #Add food review on a food item
 def add_food_review():
-    
     print("\n\033[1m\033[94m-----ADD FOOD REVIEW-----\033[0m")
     #QUery to show  all the food items
-    print("FOOD ITEMS....")
+    print("List of Food Items: ")
     FoodItemChoice = input("\nChoice: ")
-    FoodRating= input("Rating (1-5):")
-    FoodContent= input("Content")
-    print("\n\033[92mSuccessully added review of food <FOOD ITEM>\033[0m\n")
+    FoodRating= input("Rating (1-5): ")
+    FoodContent= input("Review: ")
+    print("\n\033[92mSuccessully added review of <FOOD ITEM>\033[0m\n")
 
  #add a food establishment review   
 def add_food_establishment_review():
@@ -33,6 +32,6 @@ def add_food_establishment_review():
     print("FOOD ESTABLISHMENTS....")
     FoodEstablishmentChoice = input("\nChoice: ")
     EstablishmentRating= input("Rating (1-5):")
-    EstablishmentContent= input("Content")
-    print("\n\033[92mSuccessully added review of ESTABLISHMENT <FOOD ESTABLSIHMENT>\033[0m\n")
+    EstablishmentContent= input("Review: ")
+    print("\n\033[92mSuccessully added review of <FOOD ESTABLISHMENT>\033[0m\n")
     
