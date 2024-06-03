@@ -36,7 +36,7 @@ def delete_food_review(username):
     
     print("List of your reviews:")
     for review in reviews:
-        print(f"Food review id: {review['Food_review_id']}, Food Name: {review['Food_name']}, Rating: {review['Rating']}, Content: {review['Content']}, Date: {review['Date']}")
+        print(f"Food review ID: {review['Food_review_id']}, Food Name: {review['Food_name']}, Rating: {review['Rating']}, Content: {review['Content']}, Date: {review['Date']}")
     # Customer selects a review to delete
     review_choice = input("\nEnter the Review ID to delete: ")
 
@@ -52,10 +52,35 @@ def delete_food_review(username):
 
 # Delete review of a food establishment
 def delete_food_establishment_review(username):
-    print("\n\033[1m\033[94m-----DELETE FOOD ESTABLISHMENT REVIEW-----\033[0m")
-    # Query to show all the customer's food establishment reviews
-    print("CUSTOMER'S FOOD ESTABLISHMENT REVIEWS....")
+    print("\n\033[1m\033[94m-----DELETE FOOD REVIEW-----\033[0m")
+
+    query = """
+    SELECT Food_review_id, Food_establishment_name, Rating, Content, Date 
+    FROM Food_Review fr
+    JOIN Food_Establishment fe ON fr.Food_establishment_id = fe.Food_establishment_id
+    WHERE Username = %s AND fr.Food_establishment_id IS NOT NULL
+    """
+    params = (username,)
+    reviews = db_util.execute_query(query, params, fetch=True)
+    
+    if not reviews:
+        print("\n\033[91mNo food establishment reviews found.\033[0m\n")
+        return
+    
+    print("List of your reviews:")
+    for review in reviews:
+        print(f"Food review ID: {review['Food_review_id']}, Food Establishment Name: {review['Food_establishment_name']}, Rating: {review['Rating']}, Content: {review['Content']}, Date: {review['Date']}")
+    
     # Customer selects a review to delete
-    review_choice = input("\nChoice: ")
+    review_choice = input("\nEnter the Review ID to delete: ")
+
     # Delete the review from the database
-    print("\n\033[92mSuccessfully deleted review of <food establishment>!\033[0m\n")
+    delete_query = "DELETE FROM Food_Review WHERE Food_review_id = %s AND Username = %s"
+    delete_params = (review_choice, username)
+    result = db_util.execute_query(delete_query, delete_params)
+
+    # Delete the review from the database
+    if result:
+        print("\n\033[92mSuccessfully deleted review of the food establishment}!\033[0m\n")
+    else:
+        print("\n\033[91mFailed to delete review. Please try again.\033[0m\n")
