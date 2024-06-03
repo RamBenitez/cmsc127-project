@@ -26,7 +26,7 @@ CREATE OR REPLACE TABLE Food_Establishment_Rating (
 
 CREATE OR REPLACE TABLE Food_Item (
     Food_id INT NOT NULL AUTO_INCREMENT,
-    Food_name VARCHAR(20) NOT NULL,
+    Food_name VARCHAR(50) NOT NULL,
     Food_price INT NOT NULL,
     Food_establishment_id INT NOT NULL,
     PRIMARY KEY (Food_id),

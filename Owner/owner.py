@@ -4,7 +4,7 @@ from .reports import reports
 from .search import search
 from .update import update
 
-def owner_menu(name):
+def owner_menu(name,username):
     while True:
         print(f"\nWelcome, {name}!\n") #dummy palang
         print("\033[1m\033[94m—---------- MENU —----\033[0m")

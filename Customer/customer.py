@@ -4,7 +4,7 @@ from .search_food_establishment import search_food_establishment
 from .search_food_item import search_food_item
 from .update_review import update_review
 
-def customer_menu(name):
+def customer_menu(username, name):
     while True:
         print(f"\n\033[1m\033[94m Welcome, {name}!\033[0m\n") #dummy palang
         print("\033[1m—---------- MENU —----\033[0m")
@@ -19,11 +19,11 @@ def customer_menu(name):
         choice = input("\nEnter your choice: ")
 
         if choice == '1':
-            add_review()
+            add_review(username)
         elif choice == '2':
             update_review()
         elif choice == '3':
-            delete_review()
+            delete_review(username)
         elif choice == '4':
             search_food_item()
         elif choice == '5':

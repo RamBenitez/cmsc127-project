@@ -1,6 +1,7 @@
 from Database.connection import get_connection
 from Database import db_util
 
+
 def add():
     while True:
         print("\n\033[1m\033[94m------ADD MENU------\033[0m") 
@@ -98,3 +99,4 @@ def add_food_item():
     else:
         print("\n\033[91mFailed to add food item. Please try again.\033[0m\n")
         return False
+
