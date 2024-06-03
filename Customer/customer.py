@@ -23,7 +23,7 @@ def customer_menu(username, name):
         elif choice == '2':
             update_review()
         elif choice == '3':
-            delete_review()
+            delete_review(username)
         elif choice == '4':
             search_food_item()
         elif choice == '5':
