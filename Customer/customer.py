@@ -21,7 +21,7 @@ def customer_menu(username, name):
         if choice == '1':
             add_review(username)
         elif choice == '2':
-            update_review()
+            update_review(username)
         elif choice == '3':
             delete_review(username)
         elif choice == '4':
