@@ -62,7 +62,7 @@ CREATE OR REPLACE TABLE Food_Review (
 CREATE OR REPLACE TABLE Creates (
     Username VARCHAR(10) NOT NULL,
     Food_establishment_id INT NOT NULL,
-    Food_id INT NOT NULL,
+    Food_id INT DEFAULT NULL,
     CONSTRAINT Creates_Username_fk 
         FOREIGN KEY(Username) REFERENCES User(Username),
     CONSTRAINT Creates_Food_establishment_id_fk 
