@@ -11,7 +11,7 @@ def add_review(username):
         if choice == '1':
             add_food_review(username)
         elif choice == '2':
-            add_food_establishment_review()
+            add_food_establishment_review(username)
         elif choice == '3':
             break
         else:
@@ -52,7 +52,7 @@ def add_food_review(username):
         print("\n\033[91mFailed to add review. Please try again.\033[0m\n")
 
 # Add a review on a food establishment   
-def add_food_establishment_review():
+def add_food_establishment_review(username):
     print("\n\033[1m\033[94m-----ADD FOOD ESTABLISHMENT REVIEW-----\033[0m")
     # Query to show all the food establishments
     query = "SELECT Food_establishment_id, Food_establishment_name FROM Food_Establishment"
@@ -64,13 +64,14 @@ def add_food_establishment_review():
     
     food_establishment_id = input("\nEnter the Food Establishment ID: ")
     rating = int(input("Rating (1-5): ")) #TODO restriction on input
+    content = input("Review: ")
 
     # Insert the review into Food_Review table
     query = """
-    INSERT INTO Food_Establishment_Rating (Food_establishment_id, Food_establishment_rating)
-    VALUES (%s, %s)
+    INSERT INTO Food_Review (Rating, Content, Date, Username, Food_establishment_id)
+    VALUES (%s, %s, CURDATE(), %s, %s)
     """
-    params = (food_establishment_id, rating)
+    params = (rating, content, username, food_establishment_id, )
     result = db_util.execute_query(query, params)
 
     if result:
