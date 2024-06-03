@@ -1,3 +1,6 @@
+from Database.connection import get_connection
+from mysql.connector import Error
+
 def delete():
     while True:
         print("\n\033[1m\033[94m------DELETE MENU------\033[0m") 
@@ -20,10 +23,28 @@ def delete():
             print("\033[91mInvalid choice. Please try again.\033[0m")
 
 def delete_food_establishment():
-    print("\n\033[1m\033[94m------DELETE A FOOD ESTABLISHMENT------\033[0m")  
-    # Query to get all food establishments
-    # Print all food establishments
-    print("List of all Food Establishments...")
+    print("\n\033[1m\033[94m------DELETE A FOOD ESTABLISHMENT------\033[0m")
+    try:
+        connection = get_connection()
+        if connection is None:
+            print("\033[91mConnection to database failed.\033[0m")
+            return
+        
+        cursor = connection.cursor()
+        cursor.execute("SELECT Food_establishment_id, Food_establishment_name FROM Food_Establishment")
+        establishments = cursor.fetchall()
+        
+        print("List of Food Establishments:")
+        for est in establishments:
+            print(f"ID: {est[0]}, Name: {est[1]}")
+            
+        cursor.close()
+    except Error as e:
+        print(f"\033[91mError: {e}\033[0m")
+        return
+    finally:
+        if connection.is_connected():
+            connection.close()
     choice = input("Choice: ")
     # Query to delete the selected food establishment
     # Delete the food establishment from the database
@@ -32,21 +53,17 @@ def delete_food_establishment():
 def delete_food_item():
     print("\n\033[1m\033[94m------DELETE A FOOD ITEM------\033[0m")
     print("List of all Food Establishments...")
-    est_choice = input("Choice: ")  
+    est_choice = input("Choice: ")
     # Query to get all food items of the selected food establishment
     # Print all food items
-    print("List of all Food Items in :")
-    food_choice = input("Choice: ")
     # Query to delete the selected food item
     # Delete the food item from the database
     print("\033[92mSuccessfully Deleted!\033[0m")
 
 def delete_food_review():
-    print("\n\033[1m------DELETE A FOOD REVIEW------\033[0m")  
+    print("\n\033[1m------DELETE A FOOD REVIEW------\033[0m")
     # Query to get all food reviews
     # Print all food reviews
-    print("List of all Food Reviews...")
-    choice = input("Choice: ")
     # Query to delete the selected food review
     # Delete the food review from the database
     print("\033[92mSuccessfully Deleted!\033[0m")
